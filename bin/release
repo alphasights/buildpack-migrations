@@ -1,5 +1,4 @@
-array=(one two three)
-
+#!/usr/bin/env bash
 
 declare -a expressions=('I live, I die. I LIVE AGAIN!' \
 'If Im gonna die, Im gonna die historic on the fury road!' \
