@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -o #exit codes on pipe
+
+#Heroku passes in these arguments
+build_dir=$1
+cache_dir=$2
+env_dir=$3
+
+bundle exec rake db:migrate
