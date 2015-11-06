@@ -9,8 +9,8 @@ cache_dir=$2
 env_dir=$3
 
 db_url=`cat ${3}/DATABASE_URL`
-latest_version=`psql ${db_url} --command="SELECT * FROM schema_migrations ORDER BY version DESC LIMIT 1" --tuples-only `
-latest_migration=`${latest_version} | awk -F "_" '{print $1}' | tail -n 1`
+latest_version=`psql ${db_url} --command="SELECT * FROM schema_migrations ORDER BY version DESC LIMIT 1" --tuples-only`
+latest_migration=`echo ${latest_version} | awk -F "_" '{print $1}' | tail -n 1`
 
 if [ ${latest_migration} -gt ${latest_version} ]
 then
