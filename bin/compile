@@ -1,10 +1,41 @@
 #!/usr/bin/env bash
 
-set -o #exit codes on pipe
-
 #Heroku passes in these arguments
+current_path=$0
 build_dir=$1
 cache_dir=$2
 env_dir=$3
 
-bundle exec rake db:migrate
+db_url=`cat ${3}/DATABASE_URL`
+migrations_done=(`psql ${db_url} --command="SELECT * FROM schema_migrations ORDER BY version DESC" --tuples-only`)
+
+known=(`ls ${build_dir}/db/migrate`)
+
+run_migrations=false
+
+for i in "${known[@]}"
+do
+  num=`echo ${i} | awk -F "_" '{print $1}'`
+  if  ! [[ " ${migrations_done[@]} " =~ " ${num} " ]]
+  then
+    echo "mismatch"
+    run_migrations=true
+  fi
+done
+
+
+
+if [[ run_migrations -eq true ]]
+then
+cd $build_dir && \
+  RACK_ENV=`cat ${3}/RACK_ENV` \
+  DATABASE_URL=`cat ${3}/DATABASE_URL` bundle exec rake db:migrate
+else
+  echo "Not running migrations. No pending migrations found."
+fi
+
+path=`echo "${current_path}" | awk -F "compile" '{printf $1}'`
+ruby ${path}/output_mad_max
+
+echo "Finished compile script"
+exit 0

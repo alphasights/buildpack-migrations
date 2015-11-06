@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+s = [
+  'I live, I die. I LIVE AGAIN!',
+  'If Im gonna die, Im gonna die historic on the fury road!',
+  'My name is Max. My world is fire. And blood.',
+  'I am the one that runs from both the living and the dead. Hunted by scavengers, haunted by those I could not protect. So I exist in this wasteland, reduced to one instinct: survive.',
+  'At least that way we might be able to... together... come across some kind of redemption.',
+  'Put a bullet in her skull. Stop the rig. Return my treasures to me and I myself will carry you to the gates of Valhalla.',
+  'You will ride eternal, shiny and chrome.',
+  'No, I am awaited. I am awaited in Valhalla!',
+  'I am your redeemer. It is by my hand you will rise from the ashes of this world.',
+  'I am the man who grabs the Sun... WHILE RIDING TO VALHALLA! WITNESS ME, BLOOD BAG! WITNESS!'
+].sample
+
+printf "#{s}\n"
