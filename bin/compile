@@ -3,8 +3,11 @@
 set -o #exit codes on pipe
 
 #Heroku passes in these arguments
+current_path=$0
 build_dir=$1
 cache_dir=$2
 env_dir=$3
 
-cd $build_dir && bundle exec rake db:migrate
+cd $build_dir && \
+  RACK_ENV=`cat ${3}/RACK_ENV` \
+  DATABASE_URL=`cat ${3}/DATABASE_URL` bundle exec rake db:migrate
