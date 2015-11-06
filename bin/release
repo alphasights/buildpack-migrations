@@ -1,0 +1,3 @@
+cat << EOF
+I ran your migrations, how awesome am I
+EOF
