@@ -39,10 +39,9 @@ done
 
 if [[ run_migrations -eq true ]]
 then
-gem install bundler
 cd $build_dir && \
   RACK_ENV=`cat ${3}/RACK_ENV` \
-  DATABASE_URL=`cat ${3}/DATABASE_URL` bundle exec rake db:migrate
+  DATABASE_URL=`cat ${3}/DATABASE_URL` rake db:migrate
 else
   echo "Not running migrations. No pending migrations found."
 fi
