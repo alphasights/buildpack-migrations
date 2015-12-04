@@ -16,6 +16,8 @@ if [ -d "$env_dir" ]; then
   done
 fi
 
+echo ${PATH}
+
 db_url=`cat ${3}/DATABASE_URL`
 migrations_done=(`psql ${db_url} --command="SELECT * FROM schema_migrations ORDER BY version DESC" --tuples-only`)
 
