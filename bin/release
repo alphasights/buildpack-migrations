@@ -1,3 +1,2 @@
-#!/usr/bin/env ruby
-
-printf "I ran your migrations, how awesome am I"
+#!/usr/bin/env bash
+echo "--- {}"
