@@ -40,7 +40,7 @@ then
 cd $build_dir && \
   RACK_ENV=`cat ${3}/RACK_ENV` \
   DATABASE_URL=`cat ${3}/DATABASE_URL` bundle exec rake db:migrate
-  if [ $? -eq 1]
+  if [ $? -eq 1 ]
   then
     echo "There was an error running migrations. Deploy halted."
     exit 1
