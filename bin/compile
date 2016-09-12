@@ -7,7 +7,7 @@ cache_dir=$2
 env_dir=$3
 
 #Load environment variables that may be needed to boot rails.
-blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+blacklist_regex=${3:-'^(GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
 if [ -d "$env_dir" ]; then
   for e in $(ls $env_dir); do
     echo "$e" | grep -qvE "$blacklist_regex" &&
@@ -15,6 +15,8 @@ if [ -d "$env_dir" ]; then
     :
   done
 fi
+
+echo ${PATH}
 
 db_url=`cat ${3}/DATABASE_URL`
 migrations_done=(`psql ${db_url} --command="SELECT * FROM schema_migrations ORDER BY version DESC" --tuples-only`)
